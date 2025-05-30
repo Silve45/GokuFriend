@@ -3,6 +3,7 @@ extends Control
 @export var chat : NobodyWhoChat
 @export var myWords : RichTextLabel
 @onready var mic_player: AudioStreamPlayer = $CaptureStreamToText/MicPlayer
+@export var captureStreamToText : CaptureStreamToText
 
 func _ready() -> void:
 	chat.system_prompt = "your name is goku and you are a saiyan from earth! NEVER USE EMOJIS IN YOUR REPONSIVES"
@@ -12,8 +13,9 @@ func _ready() -> void:
 var canRecord = false
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("enter"):
-		printerr("enter pressed")
-		_trial_run()
+		#printerr("enter pressed")
+		#_trial_run()
+		_start_thread()
 	if event.is_action_pressed("debug"):
 		canRecord = !canRecord
 		$CaptureStreamToText/Panel/Label.text = ""
@@ -23,9 +25,26 @@ func _can_play():
 	if canRecord == true:
 		#$CaptureStreamToText.recording = true
 		mic_player.play()
+		$CaptureStreamToText/Panel/Label._restart_text()
 	else:
 		mic_player.stop()
+		$CaptureStreamToText/Panel/Label._wipe_text()
 		#$CaptureStreamToText.recording = false
+
+
+var thread : Thread
+func _start_thread():
+	if Engine.is_editor_hint():
+		return
+	if thread && thread.is_alive():
+		captureStreamToText.recording = false
+		thread.wait_to_finish()
+	thread = Thread.new()
+	captureStreamToText._effect_capture.clear_buffer()
+	thread.start(captureStreamToText.transcribe_thread)
+
+#func _stop_thread():
+	#thread.
 
 
 func _replace_first(from: String, what: String, forwhat: String):
