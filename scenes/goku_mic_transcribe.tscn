@@ -58,15 +58,10 @@ Time to process: 0s
 script = ExtResource("3_fb1hx")
 
 [node name="Label" type="RichTextLabel" parent="CaptureStreamToText"]
+visible = false
 layout_mode = 2
 text = "Add a language model or download one. Then, set it as language_model.
 Takes sample every 5s and transcribes below."
-
-[node name="CaptureStreamToText" type="SpeechToText" parent="CaptureStreamToText"]
-language_model = ExtResource("6_ko6jf")
-script = ExtResource("7_m2ua7")
-transcribe_interval = 1.0
-maximum_sentence_time = 10
 
 [node name="nobodyWhoStuff" type="Node" parent="CaptureStreamToText"]
 
@@ -75,3 +70,9 @@ model_path = "res://resources/languageModels/gemma-2-2b-it-Q4_K_M.gguf"
 
 [node name="NobodyWhoChat" type="NobodyWhoChat" parent="CaptureStreamToText/nobodyWhoStuff" node_paths=PackedStringArray("model_node")]
 model_node = NodePath("../NobodyWhoModel")
+
+[node name="CaptureStreamToText" type="SpeechToText" parent="CaptureStreamToText"]
+language_model = ExtResource("6_ko6jf")
+script = ExtResource("7_m2ua7")
+transcribe_interval = 1.0
+maximum_sentence_time = 10

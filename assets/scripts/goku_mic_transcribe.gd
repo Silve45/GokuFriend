@@ -28,9 +28,21 @@ func _can_play():
 		#$CaptureStreamToText.recording = false
 
 
+func _replace_first(from: String, what: String, forwhat: String):
+	var idx = from.find(what)
+	if idx == -1: return from
+	return from.substr(0, idx) + forwhat + from.substr(idx + what.length())
+
+
+var extraWords : String
 func _trial_run():
+	var words = myWords.text
+	var finalWords = _replace_first(words, extraWords, "")
 	
-	chat.say("what is your name then?")
+	printerr("I said : ", finalWords)
+	chat.say(finalWords)
+	
+	extraWords = words #add all previous words to this string
 	
 	var response = await chat.response_finished
 	print("He said: " + response)

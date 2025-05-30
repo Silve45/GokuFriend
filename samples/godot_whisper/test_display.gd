@@ -2,7 +2,8 @@ extends RichTextLabel
 
 
 func update_text():
-	text = completed_text + "[color=green]" + partial_text + "[/color]"
+	#text = completed_text + "[color=green]" + partial_text + "[/color]"
+	text = completed_text  + partial_text 
 
 func _process(_delta):
 	update_text()
