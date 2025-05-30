@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd5ahqphgp1ht"]
+
+[ext_resource type="WhisperResource" uid="uid://bfm5voob556tp" path="res://addons/godot_whisper/models/gglm-base.en.bin" id="1_w5jg2"]
+[ext_resource type="Script" uid="uid://cmvdxewoys7i1" path="res://addons/godot_whisper/capture_stream_to_text.gd" id="2_pdcmh"]
+[ext_resource type="AudioStream" uid="uid://1ytlsjpfecej" path="res://baconTest.wav" id="3_1mh55"]
+[ext_resource type="Script" uid="uid://yk8ydhh281wn" path="res://addons/godot_whisper/label_transcribe.gd" id="4_4d0b6"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="SpeechToText" type="SpeechToText" parent="."]
+language_model = ExtResource("1_w5jg2")
+script = ExtResource("2_pdcmh")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1mh55")
+autoplay = true
+bus = &"Record"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 170.0
+offset_top = 113.0
+offset_right = 210.0
+offset_bottom = 153.0
+script = ExtResource("4_4d0b6")
+
+[connection signal="transcribed_msg" from="SpeechToText" to="RichTextLabel" method="_on_speech_to_text_transcribed_msg"]

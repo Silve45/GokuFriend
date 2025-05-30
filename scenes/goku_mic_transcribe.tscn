@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfqv1tgt6sdub"]
+
+[ext_resource type="Script" uid="uid://dyhwuw63yd0uj" path="res://assets/scripts/goku_mic_transcribe.gd" id="1_d03yr"]
+[ext_resource type="Script" uid="uid://clmlqmjaqykgd" path="res://samples/godot_whisper/sample_setup.gd" id="1_nh2n4"]
+[ext_resource type="Script" uid="uid://cykea0tihs4o2" path="res://samples/godot_whisper/test_display.gd" id="3_fb1hx"]
+[ext_resource type="WhisperResource" uid="uid://dqlmxwtm5x1vn" path="res://addons/godot_whisper/models/gglm-tiny.en.bin" id="6_ko6jf"]
+[ext_resource type="Script" uid="uid://cmvdxewoys7i1" path="res://addons/godot_whisper/capture_stream_to_text.gd" id="7_m2ua7"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_rhq81"]
+
+[node name="GokuMicTranscribe" type="Control" node_paths=PackedStringArray("chat", "myWords")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d03yr")
+chat = NodePath("CaptureStreamToText/nobodyWhoStuff/NobodyWhoChat")
+myWords = NodePath("CaptureStreamToText/Panel/Label")
+
+[node name="CaptureStreamToText" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -219.5
+offset_right = 200.0
+offset_bottom = 219.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nh2n4")
+
+[node name="MicPlayer" type="AudioStreamPlayer" parent="CaptureStreamToText"]
+stream = SubResource("AudioStreamMicrophone_rhq81")
+bus = &"Record"
+
+[node name="Panel" type="Panel" parent="CaptureStreamToText"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="CaptureStreamToText/Panel"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "Time: 0s
+Time to process: 0s
+..."
+script = ExtResource("3_fb1hx")
+
+[node name="Label" type="RichTextLabel" parent="CaptureStreamToText"]
+layout_mode = 2
+text = "Add a language model or download one. Then, set it as language_model.
+Takes sample every 5s and transcribes below."
+
+[node name="CaptureStreamToText" type="SpeechToText" parent="CaptureStreamToText"]
+language_model = ExtResource("6_ko6jf")
+script = ExtResource("7_m2ua7")
+transcribe_interval = 1.0
+maximum_sentence_time = 10
+
+[node name="nobodyWhoStuff" type="Node" parent="CaptureStreamToText"]
+
+[node name="NobodyWhoModel" type="NobodyWhoModel" parent="CaptureStreamToText/nobodyWhoStuff"]
+model_path = "res://resources/languageModels/gemma-2-2b-it-Q4_K_M.gguf"
+
+[node name="NobodyWhoChat" type="NobodyWhoChat" parent="CaptureStreamToText/nobodyWhoStuff" node_paths=PackedStringArray("model_node")]
+model_node = NodePath("../NobodyWhoModel")

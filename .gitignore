@@ -1,0 +1,8 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+resources/languageModels/gemma-2-2b-it-Q4_K_M.gguf
+addons/godot_whisper/ 
+addons/
+addons/nobodywho
+#you need to readd godot_whiper, nobodywho, and the language Model if you want this to work latere
