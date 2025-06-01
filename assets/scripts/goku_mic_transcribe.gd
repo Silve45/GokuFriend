@@ -4,7 +4,8 @@ extends Control
 @export var myWords : RichTextLabel
 @onready var mic_player: AudioStreamPlayer = $CaptureStreamToText/MicPlayer
 @export var captureStreamToText : CaptureStreamToText
-@onready var mouthAnimationTree = $"3dScene/GokuScene/AnimationTree"
+@onready var mouthAnimationTree = $"3dScene/GokuScene/mouthAnimationTree"
+@onready var headAnimationTree = $"3dScene/GokuScene/headAnimations/headAnimationTree"
 var regularMouth = load("res://assets/blender/goku/imagesAndPSDS/mouth.png")
 var talkingMouth1 = load("res://assets/blender/goku/imagesAndPSDS/mouthTalking1.png")
 var canRecord = false
@@ -18,11 +19,14 @@ func _ready() -> void:
 func _mouth_animation_start():
 	mouthAnimationTree.set("parameters/conditions/moving",true)
 	mouthAnimationTree.set("parameters/conditions/idle",false)
-
+	headAnimationTree.set("parameters/conditions/moving", true)
+	headAnimationTree.set("parameters/conditions/idle", false)
 
 func _mouth_animation_stop():
 	mouthAnimationTree.set("parameters/conditions/idle",true)
 	mouthAnimationTree.set("parameters/conditions/moving",false)
+	headAnimationTree.set("parameters/conditions/idle", true)
+	headAnimationTree.set("parameters/conditions/moving", false)
 
 
 
