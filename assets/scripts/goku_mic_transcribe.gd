@@ -4,6 +4,7 @@ extends Control
 @export var myWords : RichTextLabel
 @onready var mic_player: AudioStreamPlayer = $CaptureStreamToText/MicPlayer
 @export var captureStreamToText : CaptureStreamToText
+@onready var mouthAnimationTree = $"3dScene/GokuScene/AnimationTree"
 var regularMouth = load("res://assets/blender/goku/imagesAndPSDS/mouth.png")
 var talkingMouth1 = load("res://assets/blender/goku/imagesAndPSDS/mouthTalking1.png")
 var canRecord = false
@@ -15,23 +16,23 @@ func _ready() -> void:
 	
 
 func _mouth_animation_start():
-	$"3dScene/GokuScene/mouthAnimations".play("mouthAnimation")
-	#await DisplayServer.tts_is_speaking() == false
-	#print("stop")
-	#_mouth_animation_stop()
-	
+	mouthAnimationTree.set("parameters/conditions/moving",true)
+	mouthAnimationTree.set("parameters/conditions/idle",false)
+
 
 func _mouth_animation_stop():
-	$"3dScene/GokuScene/mouthAnimations".play("idleMouth")
+	mouthAnimationTree.set("parameters/conditions/idle",true)
+	mouthAnimationTree.set("parameters/conditions/moving",false)
 
 
 
 var incrementNum = 0
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("enter"):
+		pass
 		#_trial_run()
 		#_start_thread()
-		pass
+		
 	if event.is_action_pressed("debug"):
 		_trial_run()
 		#canRecord = !canRecord
@@ -92,7 +93,6 @@ func _trial_run():
 
 func _stop_mouth(_id):
 	_mouth_animation_stop()
-	printerr(" DONENOEONENOE")
 
 
 func _mouth_animation(whichMouth : int):

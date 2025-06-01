@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bfqv1tgt6sdub"]
+[gd_scene load_steps=34 format=4 uid="uid://bfqv1tgt6sdub"]
 
 [ext_resource type="Script" uid="uid://dyhwuw63yd0uj" path="res://assets/scripts/goku_mic_transcribe.gd" id="1_d03yr"]
 [ext_resource type="Script" uid="uid://clmlqmjaqykgd" path="res://samples/godot_whisper/sample_setup.gd" id="1_nh2n4"]
@@ -257,6 +257,35 @@ _data = {
 &"mouthAnimation": SubResource("Animation_7khmo")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l5luf"]
+animation = &"idleMouth"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7khmo"]
+animation = &"mouthAnimation"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_42cfe"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8h1ls"]
+break_loop_at_end = true
+advance_mode = 2
+advance_condition = &"moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q0oj7"]
+break_loop_at_end = true
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ekaus"]
+states/End/position = Vector2(651.2, 72)
+states/Start/position = Vector2(138.4, 97.984)
+states/idleMouth/node = SubResource("AnimationNodeAnimation_l5luf")
+states/idleMouth/position = Vector2(276.8, 85.2)
+states/mouthAnimation/node = SubResource("AnimationNodeAnimation_7khmo")
+states/mouthAnimation/position = Vector2(452.8, 84.72)
+transitions = ["Start", "idleMouth", SubResource("AnimationNodeStateMachineTransition_42cfe"), "idleMouth", "mouthAnimation", SubResource("AnimationNodeStateMachineTransition_8h1ls"), "mouthAnimation", "idleMouth", SubResource("AnimationNodeStateMachineTransition_q0oj7")]
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_0sec1"]
 viewport_path = NodePath("3dScene")
 
@@ -301,6 +330,12 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_42cfe")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="3dScene/GokuScene"]
+tree_root = SubResource("AnimationNodeStateMachine_ekaus")
+anim_player = NodePath("../mouthAnimations")
+parameters/conditions/idle = false
+parameters/conditions/moving = false
 
 [node name="VisualScene" type="Control" parent="."]
 layout_mode = 1
