@@ -160,7 +160,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_0sec1"]
 resource_name = "idleAnimation"
-length = 3.0
+length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -169,7 +169,7 @@ tracks/0/path = NodePath("goku:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.73333),
+"times": PackedFloat32Array(0, 2.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, -0.0973996, 0)]
@@ -181,7 +181,7 @@ tracks/1/path = NodePath("goku:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.93333),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, -0.0523599), Vector3(0, 0, 0.0174533)]
@@ -408,7 +408,7 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_py6yk")
 anim_player = NodePath("..")
 parameters/conditions/idle = false
-parameters/conditions/moving = true
+parameters/conditions/moving = false
 
 [node name="mouthAnimations" type="AnimationPlayer" parent="3dScene/GokuScene"]
 libraries = {
