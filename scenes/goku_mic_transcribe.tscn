@@ -1,10 +1,32 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfqv1tgt6sdub"]
+[gd_scene load_steps=14 format=3 uid="uid://bfqv1tgt6sdub"]
 
 [ext_resource type="Script" uid="uid://dyhwuw63yd0uj" path="res://assets/scripts/goku_mic_transcribe.gd" id="1_d03yr"]
 [ext_resource type="Script" uid="uid://clmlqmjaqykgd" path="res://samples/godot_whisper/sample_setup.gd" id="1_nh2n4"]
+[ext_resource type="Texture2D" uid="uid://inp64l7eaco3" path="res://assets/sprites/SuperDragonBallMoviesBackground.png" id="2_i6w11"]
 [ext_resource type="Script" uid="uid://cykea0tihs4o2" path="res://samples/godot_whisper/test_display.gd" id="3_fb1hx"]
-[ext_resource type="WhisperResource" uid="uid://dqlmxwtm5x1vn" path="res://addons/godot_whisper/models/gglm-tiny.en.bin" id="6_ko6jf"]
+[ext_resource type="WhisperResource" uid="uid://bfm5voob556tp" path="res://addons/godot_whisper/models/gglm-base.en.bin" id="6_0sec1"]
+[ext_resource type="PackedScene" uid="uid://wexvvuuit6ux" path="res://assets/blender/goku/goku.blend" id="7_0sec1"]
 [ext_resource type="Script" uid="uid://cmvdxewoys7i1" path="res://addons/godot_whisper/capture_stream_to_text.gd" id="7_m2ua7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sec1"]
+shading_mode = 0
+albedo_color = Color(0.988235, 0.827451, 0.690196, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0sec1"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_vwvpx"]
+sky_material = SubResource("ProceduralSkyMaterial_0sec1")
+
+[sub_resource type="Environment" id="Environment_l5luf"]
+background_mode = 2
+sky = SubResource("Sky_vwvpx")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0sec1"]
+viewport_path = NodePath("3dScene")
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_rhq81"]
 
@@ -20,6 +42,56 @@ chat = NodePath("CaptureStreamToText/nobodyWhoStuff/NobodyWhoChat")
 myWords = NodePath("CaptureStreamToText/Panel/Label")
 captureStreamToText = NodePath("CaptureStreamToText/CaptureStreamToText")
 
+[node name="3dScene" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="GokuScene" type="Node3D" parent="3dScene"]
+
+[node name="goku" parent="3dScene/GokuScene" instance=ExtResource("7_0sec1")]
+
+[node name="headShape" parent="3dScene/GokuScene/goku" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0sec1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="3dScene/GokuScene"]
+environment = SubResource("Environment_l5luf")
+
+[node name="Camera3D" type="Camera3D" parent="3dScene/GokuScene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.75459)
+
+[node name="VisualScene" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="VisualScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i6w11")
+
+[node name="Goku" type="TextureRect" parent="VisualScene"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -670.0
+offset_top = -634.0
+offset_right = -158.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.6, 2.6)
+texture = SubResource("ViewportTexture_0sec1")
+
 [node name="CaptureStreamToText" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -27,10 +99,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -219.5
-offset_right = 200.0
-offset_bottom = 219.5
+offset_left = -579.0
+offset_top = 217.0
+offset_right = -179.0
+offset_bottom = 317.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nh2n4")
@@ -40,11 +112,11 @@ stream = SubResource("AudioStreamMicrophone_rhq81")
 bus = &"Record"
 
 [node name="Panel" type="Panel" parent="CaptureStreamToText"]
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 2
 
 [node name="Label" type="RichTextLabel" parent="CaptureStreamToText/Panel"]
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(400, 100)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,12 +130,6 @@ Time to process: 0s
 ..."
 script = ExtResource("3_fb1hx")
 
-[node name="Label" type="RichTextLabel" parent="CaptureStreamToText"]
-visible = false
-layout_mode = 2
-text = "Add a language model or download one. Then, set it as language_model.
-Takes sample every 5s and transcribes below."
-
 [node name="nobodyWhoStuff" type="Node" parent="CaptureStreamToText"]
 
 [node name="NobodyWhoModel" type="NobodyWhoModel" parent="CaptureStreamToText/nobodyWhoStuff"]
@@ -73,7 +139,9 @@ model_path = "res://resources/languageModels/gemma-2-2b-it-Q4_K_M.gguf"
 model_node = NodePath("../NobodyWhoModel")
 
 [node name="CaptureStreamToText" type="SpeechToText" parent="CaptureStreamToText"]
-language_model = ExtResource("6_ko6jf")
+language_model = ExtResource("6_0sec1")
 script = ExtResource("7_m2ua7")
 transcribe_interval = 1.0
 maximum_sentence_time = 10
+
+[editable path="3dScene/GokuScene/goku"]

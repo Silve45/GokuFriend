@@ -13,7 +13,6 @@ func _ready() -> void:
 var canRecord = false
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("enter"):
-		#printerr("enter pressed")
 		#_trial_run()
 		_start_thread()
 	if event.is_action_pressed("debug"):
@@ -43,9 +42,6 @@ func _start_thread():
 	captureStreamToText._effect_capture.clear_buffer()
 	thread.start(captureStreamToText.transcribe_thread)
 
-#func _stop_thread():
-	#thread.
-
 
 func _replace_first(from: String, what: String, forwhat: String):
 	var idx = from.find(what)
@@ -58,7 +54,7 @@ func _trial_run():
 	var words = myWords.text
 	var finalWords = _replace_first(words, extraWords, "")
 	
-	printerr("I said : ", finalWords)
+	print("I said : ", finalWords)
 	chat.say(finalWords)
 	
 	extraWords = words #add all previous words to this string
