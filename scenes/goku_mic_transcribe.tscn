@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://bfqv1tgt6sdub"]
+[gd_scene load_steps=52 format=4 uid="uid://bfqv1tgt6sdub"]
 
 [ext_resource type="Script" uid="uid://dyhwuw63yd0uj" path="res://assets/scripts/goku_mic_transcribe.gd" id="1_d03yr"]
 [ext_resource type="Script" uid="uid://clmlqmjaqykgd" path="res://samples/godot_whisper/sample_setup.gd" id="1_nh2n4"]
@@ -187,34 +187,6 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, -0.0523599), Vector3(0, 0, 0.0174533)]
 }
 
-[sub_resource type="Animation" id="Animation_l5luf"]
-resource_name = "talking"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("goku:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("goku:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, -0.0523599), Vector3(0.0349066, 0, -0.0174533)]
-}
-
 [sub_resource type="Animation" id="Animation_8h1ls"]
 resource_name = "spawnIN"
 tracks/0/type = "value"
@@ -242,16 +214,137 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -0.0523599)]
 }
 
+[sub_resource type="Animation" id="Animation_l5luf"]
+resource_name = "talking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("goku:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("goku:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.0523599), Vector3(0.0349066, 0, -0.0174533)]
+}
+
+[sub_resource type="Animation" id="Animation_q0oj7"]
+resource_name = "listening"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("goku:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("goku:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.200713, -0.403171, -0.0523599)]
+}
+
+[sub_resource type="Animation" id="Animation_ekaus"]
+resource_name = "listeningToTalking"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("goku:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("goku:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.0523599)]
+}
+
+[sub_resource type="Animation" id="Animation_y0v1g"]
+resource_name = "talkingToIdle"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("goku:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("goku:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.0523599)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l5luf"]
 _data = {
 &"RESET": SubResource("Animation_vwvpx"),
 &"idleAnimation": SubResource("Animation_0sec1"),
+&"listening": SubResource("Animation_q0oj7"),
+&"listeningToTalking": SubResource("Animation_ekaus"),
 &"spawnIN": SubResource("Animation_8h1ls"),
-&"talking": SubResource("Animation_l5luf")
+&"talking": SubResource("Animation_l5luf"),
+&"talkingToIdle": SubResource("Animation_y0v1g")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_42cfe"]
 animation = &"idleAnimation"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ekaus"]
+animation = &"listening"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y0v1g"]
+animation = &"listeningToTalking"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q0oj7"]
 animation = &"spawnIN"
@@ -259,17 +352,8 @@ animation = &"spawnIN"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8h1ls"]
 animation = &"talking"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y0v1g"]
-break_loop_at_end = true
-switch_mode = 1
-advance_mode = 2
-advance_condition = &"moving"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fd7xm"]
-break_loop_at_end = true
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fd7xm"]
+animation = &"talkingToIdle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ekaus"]
 advance_mode = 2
@@ -278,15 +362,49 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m04ep"]
+xfade_time = 1.0
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"listening"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jcypo"]
+xfade_time = 0.5
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"talking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bd3r"]
+xfade_time = 1.0
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kmew7"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s53fk"]
+xfade_time = 0.5
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_py6yk"]
 states/Start/position = Vector2(36, 61.152)
 states/idleAnimation/node = SubResource("AnimationNodeAnimation_42cfe")
-states/idleAnimation/position = Vector2(347.2, 91.6)
+states/idleAnimation/position = Vector2(276.8, 113.2)
+states/listening/node = SubResource("AnimationNodeAnimation_ekaus")
+states/listening/position = Vector2(425.4, 23.2698)
+states/listeningToTalking/node = SubResource("AnimationNodeAnimation_y0v1g")
+states/listeningToTalking/position = Vector2(621.4, 23.6)
 states/spawnIN/node = SubResource("AnimationNodeAnimation_q0oj7")
-states/spawnIN/position = Vector2(177.6, 60.4)
+states/spawnIN/position = Vector2(150.4, 30.64)
 states/talking/node = SubResource("AnimationNodeAnimation_8h1ls")
-states/talking/position = Vector2(639.2, 74)
-transitions = ["idleAnimation", "talking", SubResource("AnimationNodeStateMachineTransition_y0v1g"), "talking", "idleAnimation", SubResource("AnimationNodeStateMachineTransition_fd7xm"), "Start", "spawnIN", SubResource("AnimationNodeStateMachineTransition_ekaus"), "spawnIN", "idleAnimation", SubResource("AnimationNodeStateMachineTransition_py6yk")]
+states/talking/position = Vector2(749.6, 120.08)
+states/talkingToIdle/node = SubResource("AnimationNodeAnimation_fd7xm")
+states/talkingToIdle/position = Vector2(501.4, 176.4)
+transitions = ["Start", "spawnIN", SubResource("AnimationNodeStateMachineTransition_ekaus"), "spawnIN", "idleAnimation", SubResource("AnimationNodeStateMachineTransition_py6yk"), "idleAnimation", "listening", SubResource("AnimationNodeStateMachineTransition_m04ep"), "listening", "listeningToTalking", SubResource("AnimationNodeStateMachineTransition_jcypo"), "listeningToTalking", "talking", SubResource("AnimationNodeStateMachineTransition_0bd3r"), "talking", "talkingToIdle", SubResource("AnimationNodeStateMachineTransition_kmew7"), "talkingToIdle", "idleAnimation", SubResource("AnimationNodeStateMachineTransition_s53fk")]
+graph_offset = Vector2(59, -12)
 
 [sub_resource type="Animation" id="Animation_42cfe"]
 resource_name = "idleMouth"
@@ -408,7 +526,8 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_py6yk")
 anim_player = NodePath("..")
 parameters/conditions/idle = false
-parameters/conditions/moving = false
+parameters/conditions/listening = false
+parameters/conditions/talking = false
 
 [node name="mouthAnimations" type="AnimationPlayer" parent="3dScene/GokuScene"]
 libraries = {
