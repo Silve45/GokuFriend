@@ -626,4 +626,22 @@ script = ExtResource("7_m2ua7")
 transcribe_interval = 1.0
 maximum_sentence_time = 10
 
+[node name="listenButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -110.0
+offset_right = -37.0
+offset_bottom = -19.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Listen"
+
+[connection signal="pressed" from="listenButton" to="." method="_on_button_pressed"]
+
 [editable path="3dScene/GokuScene/goku"]

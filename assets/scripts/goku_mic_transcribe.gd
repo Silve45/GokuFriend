@@ -28,6 +28,8 @@ func _mouth_animation_stop():
 	_trigger_head_animation_state(0)#idle
 	$CaptureStreamToText/Panel/Label._wipe_text()
 	isTalking = false
+	listenButton.text = "Listen"
+	listenButton.disabled = false
 
 func _trigger_head_animation_state(state):
 	headAnimationTree.set("parameters/conditions/idle", false)
@@ -50,14 +52,29 @@ func _input(event: InputEvent) -> void:
 		_start_thread()
 			#started = true
 	if event.is_action_pressed("space"):
-		if isTalking == false:
-			canRecord = !canRecord
-			if canRecord == true:
-				_listening()
-			else:
-				_talking()
+		_activate_states()
+		#if isTalking == false:
+			#canRecord = !canRecord
+			#if canRecord == true:
+				#_listening()
+			#else:
+				#_talking()
+
+@onready var listenButton = $listenButton
+func _on_button_pressed() -> void:
+	_activate_states()
 
 
+func _activate_states():
+	if isTalking == false:
+		canRecord = !canRecord
+		if canRecord == true:
+			_listening()
+			listenButton.text = "stop"
+		else:
+			_talking()
+			listenButton.text = "wait..."
+			listenButton.disabled = true
 
 func _listening():
 	mic_player.play()
