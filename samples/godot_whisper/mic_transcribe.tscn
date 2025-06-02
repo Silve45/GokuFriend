@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cykea0tihs4o2" path="res://samples/godot_whisper/test_display.gd" id="2_bmtbk"]
 [ext_resource type="Script" uid="uid://dg33xjv18viqx" path="res://samples/godot_whisper/StartButton.gd" id="3_bbt5i"]
 [ext_resource type="Script" uid="uid://bultr4s04ktfp" path="res://samples/godot_whisper/enable_mic.gd" id="5_4gpdh"]
-[ext_resource type="Script" uid="uid://cmvdxewoys7i1" path="res://addons/godot_whisper/capture_stream_to_text.gd" id="5_c8lup"]
+[ext_resource type="Script" uid="uid://cmvdxewoys7i1" path="res://capture_stream_to_text.gd" id="5_c8lup"]
 [ext_resource type="WhisperResource" uid="uid://dqlmxwtm5x1vn" path="res://addons/godot_whisper/models/gglm-tiny.en.bin" id="6_1ttbt"]
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_rhq81"]

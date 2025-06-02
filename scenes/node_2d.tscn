@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dd5ahqphgp1ht"]
 
 [ext_resource type="WhisperResource" uid="uid://bfm5voob556tp" path="res://addons/godot_whisper/models/gglm-base.en.bin" id="1_w5jg2"]
-[ext_resource type="Script" uid="uid://cmvdxewoys7i1" path="res://addons/godot_whisper/capture_stream_to_text.gd" id="2_pdcmh"]
+[ext_resource type="Script" uid="uid://cmvdxewoys7i1" path="res://capture_stream_to_text.gd" id="2_pdcmh"]
 [ext_resource type="AudioStream" uid="uid://1ytlsjpfecej" path="res://baconTest.wav" id="3_1mh55"]
 [ext_resource type="Script" uid="uid://yk8ydhh281wn" path="res://addons/godot_whisper/label_transcribe.gd" id="4_4d0b6"]
 
