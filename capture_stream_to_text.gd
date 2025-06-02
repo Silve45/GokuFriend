@@ -46,7 +46,8 @@ func _get_configuration_warnings():
 
 var thread : Thread
 
-#func _ready():
+func _ready():
+	_start_thread()
 	#if Engine.is_editor_hint():
 		#return
 	#if thread && thread.is_alive():
@@ -55,7 +56,16 @@ var thread : Thread
 	#thread = Thread.new()
 	#_effect_capture.clear_buffer()
 	#thread.start(transcribe_thread)
-	
+
+func _start_thread():
+	if Engine.is_editor_hint():
+		return
+	if thread && thread.is_alive():
+		recording = false
+		thread.wait_to_finish()
+	thread = Thread.new()
+	_effect_capture.clear_buffer()
+	thread.start(transcribe_thread)
 
 var _accumulated_frames: PackedVector2Array
 
@@ -73,7 +83,7 @@ func transcribe_thread():
 			#print("no activity")
 			#continue
 		var total_time : float= (resampled.size() as float) / SpeechToText.SPEECH_SETTING_SAMPLE_RATE
-		var audio_ctx : int = total_time * 1500 / 30 + 128
+		var audio_ctx : int = 1500 #total_time * 1500 / 30 + 128
 		#if audio_ctx > 1500:I added these here!
 			#audio_ctx == 1500I added these here!
 			#printerr("audio is too big")I added these here!

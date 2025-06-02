@@ -46,21 +46,17 @@ var started = false
 var canRecord = false
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("enter"):
-		if started == false:
-			_start_thread()
-			started = true
-		
+		#if started == false:
+		_start_thread()
+			#started = true
 	if event.is_action_pressed("space"):
-		#_trial_run()
 		if isTalking == false:
 			canRecord = !canRecord
 			if canRecord == true:
 				_listening()
 			else:
 				_talking()
-			
-		#$CaptureStreamToText/Panel/Label.text = "" #sa does nothing
-		#_can_play()
+
 
 
 func _listening():
@@ -121,16 +117,16 @@ func _can_play():
 		#$CaptureStreamToText.recording = false
 
 
-var thread : Thread
+#var thread : Thread
 func _start_thread():
 	if Engine.is_editor_hint():
 		return
-	if thread && thread.is_alive():
+	if captureStreamToText.thread && captureStreamToText.thread.is_alive():
 		captureStreamToText.recording = false
-		thread.wait_to_finish()
-	thread = Thread.new()
+		captureStreamToText.thread.wait_to_finish()
+	captureStreamToText.thread = Thread.new()
 	captureStreamToText._effect_capture.clear_buffer()
-	thread.start(captureStreamToText.transcribe_thread)
+	captureStreamToText.thread.start(captureStreamToText.transcribe_thread)
 
 
 func _replace_first(from: String, what: String, forwhat: String):
