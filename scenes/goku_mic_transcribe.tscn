@@ -1,9 +1,9 @@
 [gd_scene load_steps=52 format=4 uid="uid://bfqv1tgt6sdub"]
 
-[ext_resource type="Script" uid="uid://dyhwuw63yd0uj" path="res://assets/scripts/goku_mic_transcribe.gd" id="1_d03yr"]
-[ext_resource type="Script" uid="uid://clmlqmjaqykgd" path="res://samples/godot_whisper/sample_setup.gd" id="1_nh2n4"]
+[ext_resource type="Script" uid="uid://dyhwuw63yd0uj" path="res://assets/scripts/goku_mic_transcribe.gd" id="1_l5luf"]
+[ext_resource type="Script" uid="uid://clmlqmjaqykgd" path="res://sample_setup.gd" id="1_nh2n4"]
 [ext_resource type="Texture2D" uid="uid://inp64l7eaco3" path="res://assets/sprites/SuperDragonBallMoviesBackground.png" id="2_i6w11"]
-[ext_resource type="Script" uid="uid://cykea0tihs4o2" path="res://samples/godot_whisper/test_display.gd" id="3_fb1hx"]
+[ext_resource type="Script" uid="uid://cykea0tihs4o2" path="res://test_display.gd" id="3_fb1hx"]
 [ext_resource type="Texture2D" uid="uid://cgj5xwubnd35o" path="res://assets/blender/goku/imagesAndPSDS/face2.png" id="3_l5luf"]
 [ext_resource type="Texture2D" uid="uid://46ots2g6ykup" path="res://assets/blender/goku/imagesAndPSDS/mouth.png" id="4_7khmo"]
 [ext_resource type="WhisperResource" uid="uid://bfm5voob556tp" path="res://addons/godot_whisper/models/gglm-base.en.bin" id="6_0sec1"]
@@ -493,7 +493,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_d03yr")
+script = ExtResource("1_l5luf")
 chat = NodePath("CaptureStreamToText/nobodyWhoStuff/NobodyWhoChat")
 myWords = NodePath("CaptureStreamToText/Panel/Label")
 captureStreamToText = NodePath("CaptureStreamToText/CaptureStreamToText")
